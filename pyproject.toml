@@ -1,0 +1,58 @@
+[project]
+name = "svango"
+version = "0.1.0"
+description = "django with: drf, jwt, dynaconf, swagger, pytest, ruff example"
+authors = [{name = "yfnel"}]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.12"
+djangorestframework = "^3.16.0"
+djangorestframework-simplejwt = "^5.5.0"
+django-filter = "^25.1"
+dynaconf = "^3.2.11"
+drf-spectacular = "^0.28.0"
+django = "^5.2.4"
+pillow = "^11.3.0"
+
+
+[tool.poetry.group.dev.dependencies]
+factory-boy = "^3.3.3"
+pytest = "^8.4.1"
+pytest-cov = "^6.2.1"
+pytest-django = "^4.11.1"
+ruff = "^0.12.4"
+
+
+[tool.poetry.group.utils]
+optional = true
+
+[tool.poetry.group.utils.dependencies]
+ipython = "^9.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "--ds svango.config.settings"
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D1", "D203", "D213"]
+exclude = ["*migrations*", "local/*"]
+
+[tool.ruff.lint.per-file-ignores]
+"*/tests/test_*.py" = ["ANN001", "ANN201", "FBT003", "PLR0913", "PLR2004", "S101", "S105"]
+
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "double"
+inline-quotes = "single"
