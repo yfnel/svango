@@ -1,0 +1,99 @@
+default:
+  DEBUG: true
+  SECRET_KEY: django-insecure-y#+010ocsw+-x-1**lb%xza+o4k4p#sxojlw29@utyv)2j)as%
+  ALLOWED_HOSTS: [ ]
+  AUTH_USER_MODEL: actors.User
+  INSTALLED_APPS:
+    - django.contrib.admin
+    - django.contrib.auth
+    - django.contrib.contenttypes
+    - django.contrib.sessions
+    - django.contrib.messages
+    - django.contrib.staticfiles
+    - django_filters
+    - rest_framework
+    - drf_spectacular
+    - actors
+  MIDDLEWARE:
+    - django.middleware.security.SecurityMiddleware
+    - django.contrib.sessions.middleware.SessionMiddleware
+    - django.middleware.common.CommonMiddleware
+    - django.middleware.csrf.CsrfViewMiddleware
+    - django.contrib.auth.middleware.AuthenticationMiddleware
+    - django.contrib.messages.middleware.MessageMiddleware
+    - django.middleware.clickjacking.XFrameOptionsMiddleware
+  ROOT_URLCONF: svango.urls
+  TEMPLATES:
+    - BACKEND: django.template.backends.django.DjangoTemplates
+      DIRS: [ ]
+      APP_DIRS: true
+      OPTIONS:
+        context_processors:
+          - django.template.context_processors.request
+          - django.contrib.auth.context_processors.auth
+          - django.contrib.messages.context_processors.messages
+  WSGI_APPLICATION: svango.wsgi.application
+  DATABASES:
+    default:
+      ENGINE: django.db.backends.sqlite3
+      NAME: db.sqlite3
+  AUTH_PASSWORD_VALIDATORS:
+    - NAME: django.contrib.auth.password_validation.UserAttributeSimilarityValidator
+    - NAME: django.contrib.auth.password_validation.MinimumLengthValidator
+    - NAME: django.contrib.auth.password_validation.CommonPasswordValidator
+    - NAME: django.contrib.auth.password_validation.NumericPasswordValidator
+  LANGUAGE_CODE: en-us
+  TIME_ZONE: UTC
+  USE_I18N: true
+  USE_TZ: true
+  STATIC_URL: /static/
+  MEDIA_URL: /media/
+  MEDIA_ROOT: static/media
+  DEFAULT_AUTO_FIELD: django.db.models.BigAutoField
+  REST_FRAMEWORK:
+    DEFAULT_AUTHENTICATION_CLASSES:
+      - rest_framework_simplejwt.authentication.JWTAuthentication
+    DEFAULT_PERMISSION_CLASSES:
+      - rest_framework.permissions.IsAuthenticated
+      - svango.utils.permissions.DjangoModelCrudPermissions
+    DEFAULT_FILTER_BACKENDS:
+      - django_filters.rest_framework.backends.DjangoFilterBackend
+      - rest_framework.filters.SearchFilter
+      - rest_framework.filters.OrderingFilter
+    DEFAULT_SCHEMA_CLASS: drf_spectacular.openapi.AutoSchema
+    DEFAULT_PAGINATION_CLASS: rest_framework.pagination.LimitOffsetPagination
+    PAGE_SIZE: 10
+  SIMPLE_JWT:
+    TOKEN_OBTAIN_SERIALIZER: rest_framework_simplejwt.serializers.TokenObtainPairSerializer
+  SPECTACULAR_SETTINGS:
+    TITLE: svango
+    DESCRIPTION: django drf jwt dynaconf swagger pytest template
+    VERSION: 0.1.0
+    COMPONENT_SPLIT_REQUEST: True
+
+development:
+  DEBUG: true
+  REST_FRAMEWORK:
+    dynaconf_merge: true
+    DEFAULT_AUTHENTICATION_CLASSES:
+      - rest_framework.authentication.SessionAuthentication
+
+production:
+  DEBUG: false
+
+testing:
+  DEBUG: true
+  ALLOWED_HOSTS:
+    - testserver
+  DATABASES:
+    default:
+      ENGINE: django.db.backends.sqlite3
+      NAME: :memory
+  TEMPLATE_DEBUG: false
+  PASSWORD_HASHERS:
+    - django.contrib.auth.hashers.MD5PasswordHasher
+  MEDIA_ROOT: /tmp
+  REST_FRAMEWORK:
+    dynaconf_merge: true
+    DEFAULT_AUTHENTICATION_CLASSES:
+      - rest_framework.authentication.SessionAuthentication
