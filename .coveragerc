@@ -1,0 +1,9 @@
+[run]
+omit =
+    manage.py
+    svango/wsgi.py
+    svango/asgi.py
+    local/*
+    *.venv/*
+    */venv/*
+    */migrations/*
