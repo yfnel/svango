@@ -4,7 +4,7 @@
 ## START SERVER FROM DOCKER
 ```bash
 docker build -t svango .
-docker run --name svango -p 8001:8001 -d svango
+docker run --name svango -p 8000:8000 -d svango
 ```
 
 ## START LOCALLY
@@ -13,7 +13,7 @@ docker run --name svango -p 8001:8001 -d svango
 poetry install --with "utils"
 poetry shell
 ./manage.py migrate
-./manage.py runserver 8001
+./manage.py runserver 8000
 ```
 
 ## ADD DEMO DATA
@@ -23,19 +23,19 @@ poetry shell
 
 ## LOGIN/TOKEN
 * get [jwt token](http://127.0.0.1:8000/api/v1/actors/token-obtain/) 
-* session [login](http://localhost:8001/actors/users/login/) 
+* session [login](http://localhost:8000/actors/users/login/) 
 
 
 ## REST API
-* explore [API](http://localhost:8001/api/v1/) 
-* explore [Admin panel](http://localhost:8001/admin/)
+* explore [API](http://localhost:8000/api/v1/) 
+* explore [Admin panel](http://localhost:8000/admin/)
 
 
 ## API SCHEMA
-* swagger [API](http://localhost:8001/api/v1/schema/swagger-ui) 
-* redoc [API](http://localhost:8001/api/v1/schema/redoc) 
-* as json [API](http://localhost:8001/api/v1/schema/?format=json) 
-* as file [API](http://localhost:8001/api/v1/schema/) 
+* swagger [API](http://localhost:8000/api/v1/schema/swagger-ui) 
+* redoc [API](http://localhost:8000/api/v1/schema/redoc) 
+* as json [API](http://localhost:8000/api/v1/schema/?format=json) 
+* as file [API](http://localhost:8000/api/v1/schema/) 
 
 
 ## LINT
