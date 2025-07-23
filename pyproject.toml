@@ -24,12 +24,23 @@ pytest-cov = "^6.2.1"
 pytest-django = "^4.11.1"
 ruff = "^0.12.4"
 
-
 [tool.poetry.group.utils]
 optional = true
 
 [tool.poetry.group.utils.dependencies]
 ipython = "^9.2.0"
+
+[tool.poetry.group.stage]
+optional = true
+
+[tool.poetry.group.stage.dependencies]
+uwsgi = "^2.0.28"
+
+[tool.poetry.group.ldap]
+optional = true
+
+[tool.poetry.group.ldap.dependencies]
+django-auth-ldap = "^5.2.0"
 
 
 [build-system]
