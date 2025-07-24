@@ -7,7 +7,7 @@ readme = "README.md"
 package-mode = false
 
 [tool.poetry.dependencies]
-python = ">=3.12"
+python = ">=3.12,<4.0"
 djangorestframework = "^3.16.0"
 djangorestframework-simplejwt = "^5.5.0"
 django-filter = "^25.1"
@@ -23,6 +23,8 @@ pytest = "^8.4.1"
 pytest-cov = "^6.2.1"
 pytest-django = "^4.11.1"
 ruff = "^0.12.4"
+pytest-socket = "^0.7.0"
+
 
 [tool.poetry.group.utils]
 optional = true
@@ -50,7 +52,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 minversion = "7.0"
-addopts = "--ds svango.config.settings"
+addopts = "--ds svango.config.settings --disable-socket --allow-unix-socket"
 
 [tool.ruff]
 line-length = 120
