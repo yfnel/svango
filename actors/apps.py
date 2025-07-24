@@ -2,7 +2,7 @@ try:  # pragma: no cover
     import ldap
     from django_auth_ldap.backend import LDAPBackend, _LDAPUser
 except ImportError:  # pragma: no cover
-    ldap = None  # pragma: no cover
+    ldap = None
 
 
 from django.apps import AppConfig
