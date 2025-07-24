@@ -12,8 +12,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import datetime
 from pathlib import Path
 
+import ldap
+from django_auth_ldap.config import LDAPSearch
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+AUTH_LDAP_USER_SEARCH = LDAPSearch('ou=users,dc=test', ldap.SCOPE_SUBTREE)
 
 # HERE STARTS DYNACONF EXTENSION LOAD (Keep at the very bottom of settings.py)
 # Read more at https://www.dynaconf.com/django/

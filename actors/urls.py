@@ -13,7 +13,7 @@ router.register('users', UserViewSet, basename='users')
 router.register('users/(?P<parent>[0-9]+)/groups', UserGroupsViewSet, basename='user-groups')
 router.register('groups', GroupViewSet, basename='groups')
 router.register('groups/(?P<parent>[0-9]+)/users', GroupUsersViewSet, basename='group-users')
-router.register('users-groups', UserGroupViewSet, basename='users-groups')
+router.register('user-group', UserGroupViewSet, basename='user-group')
 
 urlpatterns = [
     path('token-obtain/', TokenObtainPairView.as_view(), name='token-obtain'),
