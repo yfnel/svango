@@ -11,6 +11,7 @@ __pycache__
 *.sqlite3_gw?
 *.sqlite3-journal
 *.egg-info
+*.mo
 *.venv/*
 *~
 .vscode
