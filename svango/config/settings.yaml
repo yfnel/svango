@@ -33,6 +33,9 @@ default:
           - django.contrib.auth.context_processors.auth
           - django.contrib.messages.context_processors.messages
   WSGI_APPLICATION: svango.wsgi.application
+  CACHES:
+    default:
+      BACKEND: django.core.cache.backends.locmem.LocMemCache
   DATABASES:
     default:
       ENGINE: django.db.backends.sqlite3

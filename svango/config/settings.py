@@ -10,10 +10,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import datetime
+import subprocess
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+VERSION = subprocess.run(['poetry', 'version'], check=False, capture_output=True, text=True).stdout.strip()  # noqa: S607
 AUTH_LDAP_USER_SEARCH = None
 
 # HERE STARTS DYNACONF EXTENSION LOAD (Keep at the very bottom of settings.py)
