@@ -20,3 +20,13 @@ def api_client() -> APIClient:
     client.credentials(HTTP_AUTHORIZATION=f'Bearer {refresh.access_token}')
     client.user = user
     return client
+
+
+@pytest.fixture
+def underprivileged_client() -> APIClient:
+    user = UserFactory(first_name='api', last_name='user')
+    refresh = RefreshToken.for_user(user)
+    client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION=f'Bearer {refresh.access_token}')
+    client.user = user
+    return client

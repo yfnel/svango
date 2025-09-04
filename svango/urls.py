@@ -4,11 +4,14 @@ from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
+from .views import version
+
 API_ROOT = 'api/v1/'
 
 
 urlpatterns = [
     path(r'admin/', admin.site.urls),
+    path('version/', version.VersionView.as_view(), name='version'),
     path(rf'{API_ROOT}actors/', include('actors.urls')),
     path(f'{API_ROOT}schema/', SpectacularAPIView.as_view(), name='schema'),
     path(f'{API_ROOT}schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
