@@ -5,8 +5,8 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
 from actors.models import User
-from svango.utils.fields import RelationField
-from svango.utils.permissions import get_fields
+from common.utils.fields import RelationField
+from common.utils.permissions import get_fields
 
 
 class UserSerializer(serializers.ModelSerializer):

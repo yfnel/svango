@@ -4,7 +4,7 @@ from rest_framework import response, viewsets
 
 import actors.views.serializers.groups
 from actors.models import PermissionGroup, User, UserGroup
-from svango.utils.mixins import BulkCreateModelMixin, RelationMixin
+from common.utils.mixins import BulkCreateModelMixin, RelationMixin
 
 from .serializers import groups
 
