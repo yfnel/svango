@@ -51,7 +51,7 @@ class UserGroupManager(BaseManager):
 class GroupQuerySet(QuerySet):
 
     def add_proxy_user_id(self, user_ids: list[int]) -> Self:
-        sq = self.model.user_set.through.objects.filter(group=OuterRef('pk'), group_id__in=user_ids)
+        sq = self.model.user_set.through.objects.filter(group=OuterRef('pk'), user_id__in=user_ids)
         return self.annotate(proxy_user_id=sq.values('pk')[:1])
 
 

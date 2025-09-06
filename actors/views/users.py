@@ -11,7 +11,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from actors.models import PermissionGroup, User
-from svango.utils.mixins import RelationMixin
+from common.utils.mixins import RelationMixin
 
 from .serializers import users
 

@@ -48,11 +48,12 @@ def test_user_groups_add(api_client):
 def test_user_groups_delete(api_client):
     user = factories.UserFactory()
     ug_1, ug_2 = factories.UserGroupFactory.create_batch(2, user=user)
-    url = reverse('user-groups-detail', kwargs={'parent': user.pk, 'pk': ug_1.pk})
+    url = reverse('user-groups-detail', kwargs={'parent': user.pk, 'pk': ug_1.group_id})
     response = api_client.delete(url, data={'relations': [ug_1.group_id, ug_2.group_id]})
     assert response.status_code == status.HTTP_204_NO_CONTENT
     assert user.groups.count() == 1
     assert user.groups.first() == ug_2.group
+    assert ug_1.group.refresh_from_db() is None
 
 
 @pytest.mark.django_db

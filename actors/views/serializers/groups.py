@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 from actors.models import PermissionGroup, UserGroup
 from actors.views.serializers.users import UserSerializer
-from svango.utils.fields import RelationField
+from common.utils.fields import RelationField
 
 
 class GroupSerializer(serializers.ModelSerializer):

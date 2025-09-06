@@ -59,7 +59,7 @@ default:
       - rest_framework_simplejwt.authentication.JWTAuthentication
     DEFAULT_PERMISSION_CLASSES:
       - rest_framework.permissions.IsAuthenticated
-      - svango.utils.permissions.DjangoModelCrudPermissions
+      - common.utils.permissions.DjangoModelCrudPermissions
     DEFAULT_FILTER_BACKENDS:
       - django_filters.rest_framework.backends.DjangoFilterBackend
       - rest_framework.filters.SearchFilter
@@ -72,7 +72,7 @@ default:
   SPECTACULAR_SETTINGS:
     TITLE: svango
     DESCRIPTION: django drf jwt dynaconf swagger pytest template
-    VERSION: 0.1.0
+    VERSION: '@format {this.VERSION}'
     COMPONENT_SPLIT_REQUEST: True
   AUTH_LDAP_SERVER_URI: 'ldap://ldap.host'
   AUTH_LDAP_BIND_DN: 'cn=testcn,ou=test_users,dc=testdc'
