@@ -13,6 +13,8 @@ default:
     - django_filters
     - rest_framework
     - drf_spectacular
+    - django_celery_beat
+
     - actors
   MIDDLEWARE:
     - django.middleware.security.SecurityMiddleware
@@ -38,8 +40,12 @@ default:
       BACKEND: django.core.cache.backends.locmem.LocMemCache
   DATABASES:
     default:
-      ENGINE: django.db.backends.sqlite3
-      NAME: db.sqlite3
+      ENGINE: django.db.backends.postgresql
+      NAME: django_db
+      USER: django_user
+      PASSWORD: django
+      HOST: 127.0.0.1
+      PORT: 5432
   AUTH_PASSWORD_VALIDATORS:
     - NAME: django.contrib.auth.password_validation.UserAttributeSimilarityValidator
     - NAME: django.contrib.auth.password_validation.MinimumLengthValidator
@@ -103,10 +109,6 @@ testing:
   DEBUG: true
   ALLOWED_HOSTS:
     - testserver
-  DATABASES:
-    default:
-      ENGINE: django.db.backends.sqlite3
-      NAME: :memory
   TEMPLATE_DEBUG: false
   PASSWORD_HASHERS:
     - django.contrib.auth.hashers.MD5PasswordHasher
@@ -115,3 +117,4 @@ testing:
     dynaconf_merge: true
     DEFAULT_AUTHENTICATION_CLASSES:
       - rest_framework.authentication.SessionAuthentication
+  CELERY_TASK_ALWAYS_EAGER: true
