@@ -1,9 +1,7 @@
 import os
+from time import sleep
 
-from celery import Celery
-from celery.utils.log import get_task_logger
-
-logger = get_task_logger(__name__)
+from celery import Celery, Task
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'svango.config.settings')
 
@@ -13,7 +11,8 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 
-@app.task(bind=True, ignore_result=True)
-def debug_task(self) -> None:  # noqa: ANN001
-    msg = f'Request: {self.request!r}'
-    logger.info(msg)
+@app.task(bind=True, ignore_result=False)
+def debug_task(task:Task, x:int, y:int, wait:int=1) -> int:
+    task.request.meta = {'wait_time': wait}
+    sleep(wait)
+    return x / y

@@ -1,9 +1,20 @@
+import datetime
+
 import pytest
+from django.utils import timezone
+from freezegun import freeze_time
 from rest_framework.test import APIClient
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from actors.models import UserPermission
 from actors.tests.factories import UserFactory
+
+
+@pytest.fixture(scope='session')
+def frozen_now() -> datetime.datetime:
+    frozen_now = timezone.now().replace(microsecond=0)
+    with freeze_time(frozen_now):
+        yield frozen_now
 
 
 @pytest.fixture
