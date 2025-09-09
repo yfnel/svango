@@ -33,4 +33,6 @@ jobs:
       - name: Ruff 2
         run: poetry run ruff check --select E301,E305,E303,E501 --preview .
       - name: Run tests
+        env:
+          DJANGO_ENV: TESTING
         run: poetry run py.test -s --cov . --cov-report=term-missing --cov-fail-under=100 --no-cov-on-fail --tb long
