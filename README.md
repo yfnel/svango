@@ -10,8 +10,8 @@ docker run --name svango -p 8000:8000 -d svango
 ## START LOCALLY
 * install [poetry](https://python-poetry.org/docs/#installation) 
 ```bash
-poetry install --with "utils"
-poetry shell
+poetry install --with utils
+`poetry env activate`
 ./manage.py migrate
 ./manage.py runserver 8000
 ```

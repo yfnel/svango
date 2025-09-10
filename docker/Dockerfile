@@ -7,14 +7,9 @@ RUN apt-get update && \
 ENV DJANGO_ENV=DEVELOPMENT
 WORKDIR /app
 
-COPY . .
+COPY .. .
 
 RUN python3 -m pip install poetry==2.1.3
 RUN poetry config virtualenvs.create false
-RUN poetry install --with utils --no-ansi --no-interaction
-RUN ./manage.py migrate
-RUN ./manage.py collectstatic --noinput
-RUN ./manage.py compilemessages
-
-EXPOSE 8000
-CMD ["./manage.py", "runserver", "0.0.0.0:8000"]
+RUN poetry install --with utils --with stage --no-ansi --no-interaction
+RUN chmod +x /app/docker/entrypoints/*
