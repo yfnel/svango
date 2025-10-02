@@ -20,7 +20,7 @@ def test_users_with_customers():
     user_2 = factories.UserFactory()
     factories.CustomerFactory(username=user_2.username)
     user_qs = models.User.objects.filter(
-        customer_id__isnull=False,  # filter users by existing customer (username of User == username of Customer)
+        customer_id__isnull=False,  # filter users by existing customer (user.username == customer.username)
     ).order_by('pk')
     assert user_qs.count() == 2
     u1, u2 = user_qs
