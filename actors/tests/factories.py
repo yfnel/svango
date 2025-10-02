@@ -23,6 +23,13 @@ class UserFactory(ModelFactory):
         model = models.User
 
 
+class CustomerFactory(ModelFactory):
+    username = factory.Faker('email')
+
+    class Meta:
+        model = models.Customer
+
+
 class GroupFactory(ModelFactory):
     name = factory.Faker('company')
 

@@ -3,7 +3,7 @@ from typing import Self
 from django.contrib.auth.models import GroupManager as BaseGroupManager
 from django.contrib.auth.models import PermissionManager
 from django.contrib.auth.models import UserManager as BaseManager
-from django.db.models import F, OuterRef, QuerySet
+from django.db.models import F, Manager, OuterRef, QuerySet
 
 
 class UserQuerySet(QuerySet):
@@ -17,6 +17,16 @@ class UserManager(BaseManager):
 
     def get_queryset(self) -> UserQuerySet:
         return UserQuerySet(self.model)
+
+
+class CustomerQuerySet(QuerySet):
+    ...
+
+
+class CustomerManager(Manager):
+
+    def get_queryset(self) -> CustomerQuerySet:
+        return CustomerQuerySet(self.model)
 
 
 class UserPermissionManager(PermissionManager):

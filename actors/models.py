@@ -13,6 +13,15 @@ class User(AbstractUser):
         return self.get_full_name()
 
 
+class Customer(models.Model):
+    username = models.CharField(max_length=150, unique=True)
+
+    objects = managers.CustomerManager()
+
+    def __str__(self) -> str:
+        return self.username
+
+
 class UserPermission(Permission):
     objects = managers.UserPermissionManager()
 
