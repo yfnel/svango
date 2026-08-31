@@ -15,7 +15,7 @@ class ModelFactory(factory.django.DjangoModelFactory):
 class UserFactory(ModelFactory):
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
-    email = factory.lazy_attribute(lambda o: f'{o.first_name}.{o.last_name}@svango.com'.lower())
+    email = factory.lazy_attribute(lambda o: f'{o.first_name}.{o.last_name}@[[ project_slug ]].com'.lower())
     username = factory.SelfAttribute('.email')
     password = factory.django.Password('pwd')
 

@@ -22,7 +22,7 @@ default:
     - django.contrib.auth.middleware.AuthenticationMiddleware
     - django.contrib.messages.middleware.MessageMiddleware
     - django.middleware.clickjacking.XFrameOptionsMiddleware
-  ROOT_URLCONF: svango.urls
+  ROOT_URLCONF: [[ project_slug ]].urls
   TEMPLATES:
     - BACKEND: django.template.backends.django.DjangoTemplates
       DIRS: [ ]
@@ -32,7 +32,7 @@ default:
           - django.template.context_processors.request
           - django.contrib.auth.context_processors.auth
           - django.contrib.messages.context_processors.messages
-  WSGI_APPLICATION: svango.wsgi.application
+  WSGI_APPLICATION: [[ project_slug ]].wsgi.application
   CACHES:
     default:
       BACKEND: django.core.cache.backends.locmem.LocMemCache
@@ -70,8 +70,8 @@ default:
   SIMPLE_JWT:
     TOKEN_OBTAIN_SERIALIZER: rest_framework_simplejwt.serializers.TokenObtainPairSerializer
   SPECTACULAR_SETTINGS:
-    TITLE: svango
-    DESCRIPTION: django drf jwt dynaconf swagger pytest template
+    TITLE: "[[ project_name ]]"
+    DESCRIPTION: "[[ project_description ]]"
     VERSION: '@format {this.VERSION}'
     COMPONENT_SPLIT_REQUEST: True
   AUTH_LDAP_SERVER_URI: 'ldap://ldap.host'

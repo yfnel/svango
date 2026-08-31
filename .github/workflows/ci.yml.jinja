@@ -1,4 +1,4 @@
-name: Svango CI
+name: "[[ project_name ]] CI"
 
 on:
   push:
@@ -10,18 +10,18 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install Python
-        uses: actions/setup-python@v4
-        # see details (matrix, python-version, python-version-file, etc.)
-        # https://github.com/actions/setup-python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "[[ python_version ]]"
       - name: Install poetry
         uses: abatilo/actions-poetry@v4
       - name: Setup a local virtual environment (if no poetry.toml file)
         run: |
           poetry config virtualenvs.create true --local
           poetry config virtualenvs.in-project true --local
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         name: Define a cache for the virtual environment based on the dependencies lock file
         with:
           path: ./.venv
