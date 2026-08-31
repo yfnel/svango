@@ -1,0 +1,56 @@
+name: Template self-check
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  render-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        use_ldap: [true, false]
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install poetry
+        uses: abatilo/actions-poetry@v4
+
+      - name: Install copier
+        run: pipx install copier
+
+      - name: Render template
+        run: |
+          copier copy . /tmp/rendered --defaults \
+            --data use_ldap=${{ matrix.use_ldap }} \
+            --trust
+
+      - name: Fail if unrendered placeholders remain
+        run: |
+          if grep -rlE '\[\[ [a-z_]+ \]\]|\[% (if|endif) ' /tmp/rendered --include="*.py" --include="*.toml" --include="*.yaml" --include="*.md"; then
+            echo "Found unrendered template placeholders above"
+            exit 1
+          fi
+
+      - name: Install rendered project dependencies
+        working-directory: /tmp/rendered
+        run: |
+          poetry config virtualenvs.in-project true --local
+          poetry install --with dev
+
+      - name: Ruff
+        working-directory: /tmp/rendered
+        run: poetry run ruff check .
+
+      - name: Run tests
+        working-directory: /tmp/rendered
+        env:
+          DJANGO_ENV: TESTING
+        run: poetry run pytest

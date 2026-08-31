@@ -1,0 +1,80 @@
+_min_copier_version: "9.0.0"
+# Custom delimiters: the default {{ }} / {% %} collide with GitHub Actions'
+# ${{ ... }} expression syntax used in .github/workflows/*.yml.
+_envops:
+  block_start_string: "[%"
+  block_end_string: "%]"
+  variable_start_string: "[["
+  variable_end_string: "]]"
+  comment_start_string: "[#"
+  comment_end_string: "#]"
+  trim_blocks: true
+  lstrip_blocks: true
+_exclude:
+  - "copier.yml"
+  - ".git"
+  - ".github/workflows/template-selfcheck.yml"
+  - "poetry.lock"
+  - "db.sqlite3"
+  - ".coverage"
+  - "__pycache__"
+  - "*.pyc"
+  - ".ruff_cache"
+  - ".pytest_cache"
+  - ".idea"
+  - "local"
+  - "local/*"
+_tasks:
+  - "git init"
+  - "poetry lock"
+
+project_name:
+  type: str
+  help: Human-readable project name
+  default: "Svango"
+
+project_slug:
+  type: str
+  help: Python package / Django project slug (lowercase, valid identifier)
+  default: "[[ project_name.lower().replace(' ', '_').replace('-', '_') ]]"
+  validator: >-
+    [% if not project_slug.isidentifier() %]
+    project_slug must be a valid Python identifier (lowercase letters, digits, underscores, not starting with a digit)
+    [% endif %]
+
+project_description:
+  type: str
+  help: Short project description
+  default: "django with: drf, jwt, dynaconf, swagger, pytest, ruff"
+
+author_name:
+  type: str
+  help: Author name
+  default: "Your Name"
+  validator: >-
+    [% if not author_name.strip() %]
+    author_name must not be empty (poetry lock fails on an empty author name)
+    [% endif %]
+
+python_version:
+  type: str
+  help: Minimum Python version
+  choices:
+    - "3.12"
+    - "3.13"
+  default: "3.12"
+
+use_ldap:
+  type: bool
+  help: Include the django-auth-ldap optional dependency group?
+  default: false
+
+use_stage:
+  type: bool
+  help: Include the uwsgi optional dependency group (for staging/production)?
+  default: true
+
+use_utils:
+  type: bool
+  help: Include the ipython optional dependency group (dev convenience)?
+  default: true
